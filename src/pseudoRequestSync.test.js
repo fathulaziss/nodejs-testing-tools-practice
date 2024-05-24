@@ -1,18 +1,15 @@
-const test = require('tape');
 const pseudoRequestSync = require('./pseudoRequestSync');
  
-test('when given by invalid url, it should throw an error', (t) => {
-  t.throws(() => pseudoRequestSync('invalid url'));
-  t.end();
-});
+describe('pseudoRequestSync function', () => {
+  test('when given by invalid url, it should throw an error', () => {
+    expect(() => pseudoRequestSync('invalid url')).toThrow();
+  });
  
-test('when given by "error" url, it should throw an error', (t) => {
-  t.throws(() => pseudoRequestSync('https://error.com'));
-  t.end();
-});
+  test('when given by "error" url, it should throw an error', () => {
+    expect(() => pseudoRequestSync('https://error.com')).toThrow();
+  });
  
-test('when given by a valid url, it should return a data object', (t) => {
-  const data = pseudoRequestSync('https://example.com');
-  t.deepEqual(data, { data: 'some data' });
-  t.end();
+  test('when given by a valid url, it should return a data object', () => {
+    expect(pseudoRequestSync('https://valid.com')).toEqual({ data: 'some data' });
+  });
 });

@@ -1,26 +1,27 @@
-const test = require('tape');
 const pseudoRequest = require('./pseudoRequest');
  
-test('when given by invalid url, error argument should be not null', (t) => {
-  pseudoRequest('invalid url', (error) => {
-    t.ok(error);
-    t.end();
+describe('pseudoRequest function', () => {
+  test('when given by invalid url, error argument should be not null', (done) => {
+    pseudoRequest('invalid url', (error) => {
+      expect(error).not.toBeNull();
+      done();
+    });
   });
-});
  
  
-test('when given by "error" url, error argument should be not null', (t) => {
-  pseudoRequest('https://error.com', (error) => {
-    t.ok(error);
-    t.end();
+  test('when given by "error" url, error argument should be not null', (done) => {
+    pseudoRequest('https://error.com', (error) => {
+      expect(error).not.toBeNull();
+      done();
+    });
   });
-});
  
  
-test('when given by a valid url, error argument should be null and data object should be defined', (t) => {
-  pseudoRequest('https://example.com', (error, data) => {
-    t.equal(error, null);
-    t.deepEqual(data, { data: 'some data' });
-    t.end();
+  test('when given by a valid url, error argument should be null and data object should be defined', (done) => {
+    pseudoRequest('https://valid.com', (error, data) => {
+      expect(error).toBeNull();
+      expect(data).toEqual({ data: 'some data' });
+      done();
+    });
   });
 });
